@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-gap: 10px;
+  /*background-color: #2196F3;*/
+  padding: 0px;
+}
+
+.grid-container > div {
+  /*background-color: rgba(255, 255, 255, 0.8);*/
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+.item1 {
+	display: grid;
+	grid-gap: 5px;
+  grid-template-columns: 50% 25% 25%;
+  box-shadow:2px 2px 2px 2px rgba(222, 222, 222, 0.18);;
+}
+
+.item2 {
+	display: grid;
+	grid-gap: 5px;
+  grid-template-columns: 25% 25% 50%;
+  box-shadow: 2px 2px 2px 2px rgba(222, 222, 222, 0.18);;
+}
+
+.item1 > div {
+	/*background-color: red;*/
+  text-align: left;
+  padding: 20px 0px;
+  font-size: 30px;
+   margin-left: 40px;
+   margin-right: 20px;
+
+ 
+}
+
+.item2 > div {
+	/*background-color: yellow;*/
+  text-align: left;
+  padding: 10px 0;
+  font-size: 30px;
+  margin-left: 40px;
+  margin-right: 20px;
+
+}
+
+.myimg {
+	width: 400px;
+}
+
+.myauth
+{
+	font-size: small;
+	text-align: left!important;
+	padding-left: 20px;
+}
+
+.mysummary
+{
+	font-size: 20px;
+	text-align: left!important;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+}
+
+.mytitle
+{
+	text-align: left!important;
+	padding-left: 20px;
+padding-bottom: : 20px!important;
+}
+
+.mycategory
+{
+	text-align: left;
+	font-size: 20px;
+	padding-left: 20px;
+}
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="grid-container">
+	
+		<!-- <div class="item1">
+			<img id="img1">
+		</div>
+</div>
+		<div class="grid-container">
+	
+	
+		<div class="item1" id="desc1">
+			2
+		</div> -->
+	
+	
+</div>
+	
+<script type="text/javascript">
+
+var Httpreq = new XMLHttpRequest(); // a new request
+    Httpreq.open("GET",'  https://static.sportskeeda.com/takehomeproject/feed.json',false);
+    Httpreq.send(null); 
+    var ourData = JSON.parse(Httpreq.responseText)
+    console.log(ourData.data.rows[0]);
+    var add = ourData.data.rows[0].thumbnail;
+    console.log(add);
+    //var myJSON = JSON.stringify(ourData);
+
+    // document.getElementById("img1").src = ourData.data.rows[0].thumbnail;
+    // document.getElementById("desc1").innerHTML = ourData.data.rows[0].title;
+    for ( var i =0 ; i<ourData.data.rows.length ; i++) {
+    	
+    	if (i%2 !== 0) {
+    	var iDiv = document.createElement('div');
+			 iDiv.id = 'r'+i;
+			iDiv.className = 'item1';
+			document.getElementsByClassName('grid-container')[0].appendChild(iDiv);
+		}
+
+		else {
+			var iDiv = document.createElement('div');
+			 iDiv.id = 'r'+i;
+			iDiv.className = 'item2';
+			document.getElementsByClassName('grid-container')[0].appendChild(iDiv);
+		}
+
+		
+
+
+		var iiDiv = document.createElement('div');
+			 iiDiv.id = 'rc1'+i;
+			iiDiv.className = 'iitem1';
+			document.getElementById('r'+i).appendChild(iiDiv);
+
+			var iimg = document.createElement('img');
+			 iimg.id = 'img1'+i;
+			iimg.className = 'myimg';
+			document.getElementById('rc1'+i).appendChild(iimg);
+
+			var iiDiv = document.createElement('div');
+			 iiDiv.id = 'rc0'+i;
+			iiDiv.className = 'iitem1';
+			document.getElementById('r'+i).appendChild(iiDiv);
+
+			var title = document.createElement('p');
+			 title.id = 'tit'+i;
+			title.className = 'mytitle';
+			document.getElementById('rc0'+i).appendChild(title);
+
+			var category1 = document.createElement('p');
+			 category1.id = 'categ'+i;
+			category1.className = 'mycategory';
+			document.getElementById('rc0'+i).appendChild(category1);
+
+			var authr = document.createElement('p');
+			 authr.id = 'auth'+i;
+			authr.className = 'myauth';
+			document.getElementById('rc0'+i).appendChild(authr);
+
+ 
+		var iiDiv = document.createElement('div');
+			 iiDiv.id = 'rc2'+i;
+			iiDiv.className = 'iitem1';
+			document.getElementById('r'+i).appendChild(iiDiv);
+
+			var summary = document.createElement('p');
+			 summary.id = 'summary'+i;
+			summary.className = 'mysummary';
+			document.getElementById('rc2'+i).appendChild(summary);
+
+
+			
+
+
+
+     // document.getElementById("rc0"+i).innerHTML = ourData.data.rows[i].title;
+
+      document.getElementById("tit"+i).innerHTML = ourData.data.rows[i].title;
+
+     
+      document.getElementById("categ"+i).innerHTML = ourData.data.rows[i].category + ":" + " &nbsp;  " + ourData.data.rows[i].subcategory;
+
+      document.getElementById("auth"+i).innerHTML = ourData.data.rows[i].author_name + " &nbsp; &nbsp; &nbsp; &nbsp;  " + ourData.data.rows[i].post_date;
+
+     document.getElementById("img1"+i).src = ourData.data.rows[i].thumbnail;
+
+     document.getElementById("summary"+i).innerHTML = ourData.data.rows[i].summary;
+
+
+    
+
+    
+     
+     
+     
+     
+
+
+
+    }
+</script>
+</body>
+</html>
